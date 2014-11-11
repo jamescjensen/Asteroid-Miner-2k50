@@ -312,14 +312,15 @@ function displaySidebar()
 {
 	var sidebar;
 	sidebar = document.getElementById("asteroids");
-	if(sidebar.style.visibility == "hidden")
+	if(sidebar.style.visibility == "visible")
 	{
-		sidebar.style.visibility = "visible";
-		sidebar.style.zIndex = 1;
+		sidebar.style.visibility = "hidden";
+
 	}
 	else
 	{
-		sidebar.style.visibility = "hidden";
+		sidebar.style.visibility = "visible";
+		sidebar.style.zIndex = 1;
 	}
 }
 function createForId(numb)
