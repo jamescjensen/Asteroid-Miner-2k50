@@ -38,6 +38,7 @@ function move(suffix, leftBoundary, rightBoundary, maxSideMovement, maxDownMovem
 	var plusminus;
 	var size;
 	var container;
+	var rotation;
 	size = 0;
 	plusminus = "+-";
 	i = 0;
@@ -46,12 +47,16 @@ function move(suffix, leftBoundary, rightBoundary, maxSideMovement, maxDownMovem
 	while(element !== null)
 	{
 		numb = Number(plusminus.charAt(getRandomInteger(1)) + getRandomInteger(maxDownMovement));
-		numb = Math.min(Math.max(getNumericPrefix(element.style.top),getNumericPrefix(container.style.top)) +  numb,container.offsetHeight-element.offsetHeight);
-		element.style.top = numb + "px";
+		numb = Math.min(Math.max(getNumericPrefix(element.style.top),getNumericPrefix(container.style.top) + 5) + numb,container.offsetHeight-element.offsetHeight);
+		//element.style.top = numb + "px";
 		numb = Number(plusminus.charAt(getRandomInteger(1)) + getRandomInteger(maxSideMovement));
 		numb = numb + getNumericPrefix(element.style.left);
 		numb = Math.max(leftBoundary,Math.min(numb, rightBoundary - element.offsetWidth)); //-2 to account for container border, which was set earlier
-		element.style.left = numb + "px";
+		//element.style.left = numb + "px";
+		rotation = element.style.transform;
+		rotation = rotation.substring(rotation.indexOf("(") + 1, rotation.indexOf("d"));
+		rotation = Number(rotation) + (101/arrayOfAsteroids[i].size);
+		element.style.transform = "rotate(" + rotation + "deg)";
 
 		i = i + 1;
 		element = document.getElementById(i + suffix);
@@ -70,6 +75,7 @@ function generateCash()
 	var element;
 	var element1;
 	var element2;
+	var sizeRound;
 	money = cash;
 	globalTime++;
 	document.getElementById("time").innerHTML = globalTime;
@@ -110,10 +116,15 @@ function generateCash()
 				}
 				if(timeLimit % Math.ceil((76-population)/3) == 0 && population != 0)
 				{
-					element = document.getElementById(i + "confetti");
-					element.style.height = (size - 1) + "px";
-					element.style.width = (size - 1) + "px";
 					arrayOfAsteroids[i].size = size - 1;
+					size = size - 1;
+					element = document.getElementById(i + "confetti");
+					sizeRound = Math.max(10,(size - size%10));
+					element.innerHTML = "<img src='ass" + sizeRound + "brn.png' style='width: 100%; height: 100%;'></img>";
+					element.style.height = size + "px";
+					element.style.width = size + "px";
+
+
 				}
 
 			}
@@ -151,7 +162,7 @@ function generateCash()
 	{
 		var choices;
 		choices = document.getElementById("choices2");
-		choices.style.backgroundColor = "orange";
+		choices.style.backgroundColor = "blue";
 		choices.innerHTML = "Choose a tech! <br><select id='chooseTech'><option value='0'>Hotel</option><option value='1'>Mining</option><option value='2'>Research</option><option value='" + Math.ceil(Math.E *techUp) +"00'>Sell for $" + Math.ceil(Math.E *techUp) + "00</option></select><input type='button' value='Choose' onclick = 'chooseTechOption();'>";
 		techReady = true;
 	}
@@ -273,6 +284,7 @@ function createConfetti(containerId, howMany)
 	var element0;
 	var height;
 	var width;
+	var rotation;
 	var imageSize;
 	height = 0;
 	width = 0;
@@ -292,14 +304,17 @@ function createConfetti(containerId, howMany)
 	while(i < howMany)
 	{
 
-		imageSize = getRandomInteger(75) + 1;
+		imageSize = getRandomInteger(99) + 10;
 		arrayOfAsteroids[i] = { state: "none", time: 0, size: imageSize, population: 0};
 		element = document.getElementById(i + idSuffix);
+
+		element.innerHTML = "<img src='ass" + (imageSize - imageSize%10) + "std.png' style='width: 100%; height: 100%;'></img>";
 		element.style.height = imageSize + "px";
 		element.style.width = imageSize + "px";
-		element.innerHTML = "<img src='ass.png' style='width: 100%; height: 100%;'></img>";
+		rotation = getRandomInteger(360);
+		element.style.transform = "rotate(" + rotation + "deg)";
 		ast.innerHTML = ast.innerHTML + "<div id='" + i + "troid' class='troid'><div id = '" + i + "ass' class='ass' onclick='buildFromId(" + i + ");'>Asteroid " + i + ": State: NONE Size: " + imageSize + "; Population: 0</div><input type='button' id='" + i + "decimate' class='decimate' onclick='decimate(" + i + ");' value='DECIMATE'></input></div>";
-		height = getRandomInteger(element0.offsetHeight - imageSize);
+		height = getRandomInteger(element0.offsetHeight - imageSize) + 10;
 		element.style.top = height + 'px';
 		width = getRandomInteger(element0.offsetWidth - imageSize);
 		element.style.left = width + 'px';
@@ -320,7 +335,7 @@ function displaySidebar()
 	else
 	{
 		sidebar.style.visibility = "visible";
-		sidebar.style.zIndex = 1;
+		sidebar.style.zIndex = 2;
 	}
 }
 function createForId(numb)
@@ -333,6 +348,7 @@ function createForId(numb)
 	var height;
 	var width;
 	var imageSize;
+	var sizeLim;
 	var containerId = "container";
 	height = 0;
 	width = 0;
@@ -344,13 +360,14 @@ function createForId(numb)
 	document.getElementById(numb + idSuffix).parentNode.removeChild(document.getElementById(numb + idSuffix));
 	var ast = document.getElementById("asteroids");
 	document.getElementById(containerId).innerHTML = document.getElementById(containerId).innerHTML + createHTMLElement('span', numb + idSuffix, 'confetti', '');
-	imageSize = getRandomInteger(100) + 1;
+	imageSize = getRandomInteger(108) + 1;
 	arrayOfAsteroids[numb] = { state: "none", time: 0, size: imageSize, population: 0};
 	element = document.getElementById(numb + idSuffix);
 	element.style.height = imageSize + "px";
 	element.style.width = imageSize + "px";
-	element.innerHTML = "<img src='ass.png' style='width: 100%; height: 100%;'></img>";
-	height = getRandomInteger(element0.offsetHeight - imageSize);
+	sizeLim = Math.max(10, (imageSize - imageSize%10));
+	element.innerHTML = "<img src='ass" + sizeLim + "std.png' style='width: 100%; height: 100%;'></img>";
+	height = getRandomInteger(element0.offsetHeight - imageSize) + 10;
 	element.style.top = height + 'px';
 	width = getRandomInteger(element0.offsetWidth - imageSize);
 	element.style.left = width + 'px';
@@ -368,45 +385,59 @@ function decimate(num)
 	var element2;
 	var imageSize;
 	var container;
+	var sizeLim;
 	var state;
 	var population;
-	state = arrayOfAsteroids[num].state;
-	population = arrayOfAsteroids[num].population;
-	if(state == "hotel")
+	if(cash < (arrayOfAsteroids[num].size * 10000) && (numMines != 0 || numHotels != 0 || numLabs != 0 || cash !=  100000))
 	{
-		globalHotelPopCap = globalHotelPopCap - population;
-		numHotels = numHotels -1;
+		window.alert("You don't have enough money to destroy this!");
 	}
-	if(state == "lab")
+	else
 	{
-		globalResearchPop = globalResearchPop - population;
-		globalPop = globalPop - population;
-		numLabs = numLabs -1;
+		if(numMines != 0 || numHotels != 0 || numLabs != 0 || cash !=  100000)
+		{
+			cash = cash - (arrayOfAsteroids[num].size * 10000);
+		}
+		state = arrayOfAsteroids[num].state;
+		population = arrayOfAsteroids[num].population;
+		if(state == "hotel")
+		{
+			globalHotelPopCap = globalHotelPopCap - population;
+			numHotels = numHotels -1;
+		}
+		if(state == "lab")
+		{
+			globalResearchPop = globalResearchPop - population;
+			globalPop = globalPop - population;
+			numLabs = numLabs -1;
+		}
+		if(state == "mine")
+		{
+			globalMinePop = globalMinePop - population;
+			globalPop = globalPop - population;
+			numMines = numMines -1;
+		}
+		element = document.getElementById(num + "confetti");
+		element.style.zIndex = "0";
+		element2 = document.getElementById(num + "ass");
+		container = document.getElementById("container");
+		imageSize = getRandomInteger(100) + 1;
+		arrayOfAsteroids[num] = { state: "none", time: 0, size: imageSize, population: 0};
+		element.style.height = imageSize + "px";
+		element.style.width = imageSize + "px";
+		sizeLim = Math.max(10, (imageSize - imageSize%10));
+		element.innerHTML = "<img src='ass" + sizeLim + "std.png' style='width: 100%; height: 100%;'></img>";
+		height = getRandomInteger(container.offsetHeight - imageSize) + 10;
+		element.style.top = height + 'px';
+		width = getRandomInteger(container.offsetWidth - imageSize);
+		element.style.left = width + 'px';
+		document.getElementById(num + "troid").style.backgroundColor = "#E0E0EB";
+		element.style.cursor = 'pointer';
+		element2.style.cursor = 'pointer';
+		element2.innerHTML = "Asteroid " + num + ": State: NONE Size: " + imageSize + " Population: 0</div>";
+		element.onclick = build;
+		element2.onclick = build;
 	}
-	if(state == "mine")
-	{
-		globalMinePop = globalMinePop - population;
-		globalPop = globalPop - population;
-		numMines = numMines -1;
-	}
-	element = document.getElementById(num + "confetti");
-	element2 = document.getElementById(num + "ass");
-	container = document.getElementById("container");
-	imageSize = getRandomInteger(100) + 1;
-	arrayOfAsteroids[num] = { state: "none", time: 0, size: imageSize, population: 0};
-	element.style.height = imageSize + "px";
-	element.style.width = imageSize + "px";
-	element.innerHTML = "<img src='ass.png' style='width: 100%; height: 100%;'></img>";
-	height = getRandomInteger(container.offsetHeight - imageSize);
-	element.style.top = height + 'px';
-	width = getRandomInteger(container.offsetWidth - imageSize);
-	element.style.left = width + 'px';
-	document.getElementById(num + "troid").style.backgroundColor = "#E0E0EB";
-	element.style.cursor = 'pointer';
-	element2.style.cursor = 'pointer';
-	element2.innerHTML = "Asteroid " + num + ": State: NONE Size: " + imageSize + " Population: 0</div>";
-	element.onclick = build;
-	element2.onclick = build;
 }
 
 function getNumericPrefix(data)
@@ -480,50 +511,74 @@ function chooseBuildOption()
 	choices.style.backgroundColor = "white";
 	if(choice == "0" && cash >= hotelTech * hugeness*2000 && hotelCap > numHotels)
 	{
-		element.innerHTML = "<img src='greenss.png' style='width: 100%; height: 100%;'></img>";
-		arrayOfAsteroids[num].state = "hotel";
-		element.onclick = null;
-		element2.onclick = null;
-		element.style.cursor = 'auto';
-		element2.style.cursor = 'auto';
-		element1.style.backgroundColor = "green";
-		arrayOfAsteroids[num].population = hotelTech * hugeness;
-		cash = cash - (hugeness*2000 * hotelTech);
-		globalHotelPopCap = globalHotelPopCap + (hotelTech * hugeness);
-		numHotels++;
+		if(hotelCap <= numHotels)
+		{
+			window.alert("You are already at your hotel capacity! Destroy some hotels or improve your Hotel tech.");
+		}
+		else
+		{
+			element.innerHTML = "<img src='ass" + Math.max(10, (hugeness - hugeness%10)) + "grn.png' style='width: 100%; height: 100%;'></img>";
+			arrayOfAsteroids[num].state = "hotel";
+			element.onclick = null;
+			element2.onclick = null;
+			element.style.cursor = 'auto';
+			element.style.zIndex = "1";
+			element2.style.cursor = 'auto';
+			element1.style.backgroundColor = "green";
+			arrayOfAsteroids[num].population = hotelTech * hugeness;
+			cash = cash - (hugeness*2000 * hotelTech);
+			globalHotelPopCap = globalHotelPopCap + (hotelTech * hugeness);
+			numHotels++;
+		}
 	}
-	else if(choice == "2" && cash >= researchTech * 10000 * hugeness && labCap > numLabs)
+	else if(choice == "2" && cash >= researchTech * 10000 * hugeness)
 	{
-		element.innerHTML = "<img src='bluess.png' style='width: 100%; height: 100%;'></img>";
-		arrayOfAsteroids[num].state = "lab";
-		element.onclick = null;
-		element2.onclick = null;
-		element.style.cursor = 'auto';
-		element2.style.cursor = 'auto';
-		element1.style.backgroundColor = "#0066FF";
-		arrayOfAsteroids[num].population = Math.min(hugeness, globalHotelPopCap - globalResearchPop - globalMinePop);
-		globalResearchPop = globalResearchPop + arrayOfAsteroids[num].population;
-		cash = cash - (10000 * hugeness * researchTech);
-		numLabs++;
+		if(labCap <= numLabs)
+		{
+			window.alert("You are already at your lab capacity! Destroy some labs or improve your Research tech.");
+		}
+		else
+		{
+			element.innerHTML = "<img src='ass" + Math.max(10, (hugeness - hugeness%10)) + "blu.png' style='width: 100%; height: 100%;'></img>";
+			arrayOfAsteroids[num].state = "lab";
+			element.onclick = null;
+			element2.onclick = null;
+			element.style.cursor = 'auto';
+			element.style.zIndex = "1";
+			element2.style.cursor = 'auto';
+			element1.style.backgroundColor = "#0066FF";
+			arrayOfAsteroids[num].population = Math.min(hugeness, globalHotelPopCap - globalResearchPop - globalMinePop);
+			globalResearchPop = globalResearchPop + arrayOfAsteroids[num].population;
+			cash = cash - (10000 * hugeness * researchTech);
+			numLabs++;
+		}
 	}
-	else if(choice == "1" && cash >= (hugeness * 5000 * mineTech) && mineCap > numMines)
+	else if(choice == "1" && cash >= (hugeness * 5000 * mineTech))
 	{
-		element.innerHTML = "<img src='miness.png' style='width: 100%; height: 100%;'></img>";
-		arrayOfAsteroids[num].state = "mine";
-		element.onclick = null;
-		element2.onclick = null;
-		element.style.cursor = 'auto';
-		element2.style.cursor = 'auto';
-		element1.style.backgroundColor = "yellow";
-		cash = cash - (hugeness * 5000 * mineTech);
-		arrayOfAsteroids[num].population = Math.min((Math.ceil(hugeness/mineTech)), globalHotelPopCap - globalResearchPop - globalMinePop);
-		globalMinePop = globalMinePop + arrayOfAsteroids[num].population;
-		numMines++;
+		if(mineCap <= numMines)
+		{
+			window.alert("You are already at your mine capacity! Destroy some mines or improve your Mine tech.");
+		}
+		else
+		{
+			element.innerHTML = "<img src='ass" + Math.max(10, (hugeness - hugeness%10)) + "brn.png' style='width: 100%; height: 100%;'></img>";
+			arrayOfAsteroids[num].state = "mine";
+			element.onclick = null;
+			element2.onclick = null;
+			element.style.cursor = 'auto';
+			element.style.zIndex = "1";
+			element2.style.cursor = 'auto';
+			element1.style.backgroundColor = "yellow";
+			cash = cash - (hugeness * 5000 * mineTech);
+			arrayOfAsteroids[num].population = Math.min((Math.ceil(hugeness/mineTech)), globalHotelPopCap - globalResearchPop - globalMinePop);
+			globalMinePop = globalMinePop + arrayOfAsteroids[num].population;
+			numMines++;
+		}
 
 	}
 	else
 	{
-		window.alert("oops! You don't have enough money for that.");
+		window.alert("You don't have enough money for that.");
 	}
 
 }

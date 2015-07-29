@@ -35,15 +35,11 @@ body
 	height:45%;
 	font-size: 5em;
 }
-#displaySidebar
-{
-	float:right;
-	z-index: 1;
-}
+
 #container
 {
 	width:100%;
-	background-color: black;
+	background-image: url('background.png');
 	position:relative;
 	float:right;
 	height:77%;
@@ -80,12 +76,56 @@ body
 .info
 {
 	float:left;
-	width: 10%;
 	white-space:pre;
 }
-.num
+.tab
 {
-	width:2%;
+	float:left;
+	white-space:pre;
+	width:10%;
+}
+#col1
+{
+	float:left;
+	position: relative;
+	left: 11%;
+}
+
+#col2
+{
+	float:left;
+	position:relative;
+	left: 19%;
+}
+#col3
+{
+	float:left;
+	position: relative;
+	left: 27%;
+}
+
+#col4
+{
+	float:left;
+	position:relative;
+	left: 35%;
+}
+#col5
+{
+	float:left;
+	position:relative;
+	left: 43%;
+}
+.infoBorder
+{
+	text-align: left;
+}
+.row
+{
+	margin-right: auto;
+	margin-left: auto;
+	width: 95%;
+	position: relative;
 }
 .troid
 {
