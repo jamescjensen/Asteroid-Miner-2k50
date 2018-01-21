@@ -36,10 +36,10 @@ body
 	font-size: 5em;
 }
 
-#container
+#asteroidContainer
 {
 	width:100%;
-	background-image: url('background.png');
+	background-image: url('Images/Backgrounds/background.png');
 	position:relative;
 	float:right;
 	height:77%;
@@ -134,7 +134,7 @@ body
 	background-color:#E0E0EB;
 	height: 2em;
 	white-space:pre;
-	
+
 }
 .ass
 {

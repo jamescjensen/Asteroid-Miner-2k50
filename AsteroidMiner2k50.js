@@ -1,10 +1,10 @@
 /*
-James Jensen
-The date goes here
-CISC 131
-Spring 2013
+	James Jensen
+	The date goes here
+	CISC 131
+	Spring 2013
 
-Description
+	Description
 */
 var cash = 100000;
 var arrayOfAsteroids = new Array(50);
@@ -30,6 +30,7 @@ window.onload=function()
 {
 	create();
 };
+
 function move(suffix, leftBoundary, rightBoundary, maxSideMovement, maxDownMovement, containerId)
 {
 	var element;
@@ -120,7 +121,7 @@ function generateCash()
 					size = size - 1;
 					element = document.getElementById(i + "confetti");
 					sizeRound = Math.max(10,(size - size%10));
-					element.innerHTML = "<img src='ass" + sizeRound + "brn.png' style='width: 100%; height: 100%;'></img>";
+					element.innerHTML = "<img src='Images/Asteroids/ass" + sizeRound + "brn.png' style='width: 100%; height: 100%;'></img>";
 					element.style.height = size + "px";
 					element.style.width = size + "px";
 
@@ -200,7 +201,7 @@ function trim(data)
 }
 function makeAsteroidsMove()
 {
-	move("confetti",0,document.getElementById("container").offsetWidth,1,1, "container");
+	move("confetti",0,document.getElementById("asteroidContainer").offsetWidth,1,1, "asteroidContainer");
 }
 function getRandomRGB()
 {
@@ -308,7 +309,7 @@ function createConfetti(containerId, howMany)
 		arrayOfAsteroids[i] = { state: "none", time: 0, size: imageSize, population: 0};
 		element = document.getElementById(i + idSuffix);
 
-		element.innerHTML = "<img src='ass" + (imageSize - imageSize%10) + "std.png' style='width: 100%; height: 100%;'></img>";
+		element.innerHTML = "<img src='Images/Asteroids/ass" + (imageSize - imageSize%10) + "std.png' style='width: 100%; height: 100%;'></img>";
 		element.style.height = imageSize + "px";
 		element.style.width = imageSize + "px";
 		rotation = getRandomInteger(360);
@@ -366,7 +367,7 @@ function createForId(numb)
 	element.style.height = imageSize + "px";
 	element.style.width = imageSize + "px";
 	sizeLim = Math.max(10, (imageSize - imageSize%10));
-	element.innerHTML = "<img src='ass" + sizeLim + "std.png' style='width: 100%; height: 100%;'></img>";
+	element.innerHTML = "<img src='Images/Asteroids/ass" + sizeLim + "std.png' style='width: 100%; height: 100%;'></img>";
 	height = getRandomInteger(element0.offsetHeight - imageSize) + 10;
 	element.style.top = height + 'px';
 	width = getRandomInteger(element0.offsetWidth - imageSize);
@@ -375,7 +376,7 @@ function createForId(numb)
 }
 function create()
 {
-	createConfetti("container", 125);
+	createConfetti("asteroidContainer", 125);
 	window.setInterval(generateCash, 100);
 	window.setInterval(makeAsteroidsMove,125);
 }
@@ -426,7 +427,7 @@ function decimate(num)
 		element.style.height = imageSize + "px";
 		element.style.width = imageSize + "px";
 		sizeLim = Math.max(10, (imageSize - imageSize%10));
-		element.innerHTML = "<img src='ass" + sizeLim + "std.png' style='width: 100%; height: 100%;'></img>";
+		element.innerHTML = "<img src='Images/Asteroids/ass" + sizeLim + "std.png' style='width: 100%; height: 100%;'></img>";
 		height = getRandomInteger(container.offsetHeight - imageSize) + 10;
 		element.style.top = height + 'px';
 		width = getRandomInteger(container.offsetWidth - imageSize);
@@ -517,7 +518,7 @@ function chooseBuildOption()
 		}
 		else
 		{
-			element.innerHTML = "<img src='ass" + Math.max(10, (hugeness - hugeness%10)) + "grn.png' style='width: 100%; height: 100%;'></img>";
+			element.innerHTML = "<img src='Images/Asteroids/ass" + Math.max(10, (hugeness - hugeness%10)) + "grn.png' style='width: 100%; height: 100%;'></img>";
 			arrayOfAsteroids[num].state = "hotel";
 			element.onclick = null;
 			element2.onclick = null;
@@ -539,7 +540,7 @@ function chooseBuildOption()
 		}
 		else
 		{
-			element.innerHTML = "<img src='ass" + Math.max(10, (hugeness - hugeness%10)) + "blu.png' style='width: 100%; height: 100%;'></img>";
+			element.innerHTML = "<img src='Images/Asteroids/ass" + Math.max(10, (hugeness - hugeness%10)) + "blu.png' style='width: 100%; height: 100%;'></img>";
 			arrayOfAsteroids[num].state = "lab";
 			element.onclick = null;
 			element2.onclick = null;
@@ -561,7 +562,7 @@ function chooseBuildOption()
 		}
 		else
 		{
-			element.innerHTML = "<img src='ass" + Math.max(10, (hugeness - hugeness%10)) + "brn.png' style='width: 100%; height: 100%;'></img>";
+			element.innerHTML = "<img src='Images/Asteroids/ass" + Math.max(10, (hugeness - hugeness%10)) + "brn.png' style='width: 100%; height: 100%;'></img>";
 			arrayOfAsteroids[num].state = "mine";
 			element.onclick = null;
 			element2.onclick = null;

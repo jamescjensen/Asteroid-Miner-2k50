@@ -1,90 +1,84 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <!--
-     James Jensen
-     The date goes here
-     CISC 131
-     Spring 2013
+     Jack Jensen
 
-     A short description of the project goes here
+		 Asteroid Miner 2k50
 -->
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+		<script src="AsteroidMiner2k50.js" type="text/javascript"></script>
+
+		<link rel="stylesheet" type="text/css" href="AsteroidMiner2k50.css"/>
+		<title>ASTEROID MINER 2K50</title>
+	</head>
+	<body>
+		<div id="asteroids"></div>
 
 
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<script src="AsteroidMiner2k50.js" type="text/javascript"></script>
+		<div id="checkitout">
+			<input type="button" value="Display Sidebar" onclick="displaySidebar();" id="displaySidebar">
+			</input>
+			<div class="name">
+				<div id="choices" class="choice"></div>
+				<div id="title">ASTEROID MINER 2K50</div>
+			</div>
 
-<link rel="stylesheet" type="text/css" href="AsteroidMiner2k50.css" />
-<title>ASTEROID MINER 2K50</title>
-</head>
-<body>
-	<div id="asteroids"></div>
-
-
-	<div id="checkitout">
-		<input type="button"  value="Display Sidebar" onclick="displaySidebar();" id="displaySidebar"></input>
-		<div class="name">
-			<div id="choices" class="choice"></div>
-			<div id="title">ASTEROID MINER 2K50</div>
-		</div>
-
-		<div class="name" id="ui">
-			<div id="choices2" class="choice"></div>
-			<div class="infoContainer">
-				<div id="col1">
-					<div class="info infoBorder">MONEY: </div>
-					<div id="actualCash" class="info">$100000</div>
+			<div class="name" id="ui">
+				<div id="choices2" class="choice"></div>
+				<div class="infoContainer">
+					<div id="col1">
+						<div class="info infoBorder">MONEY: </div>
+						<div id="actualCash" class="info">$100000</div>
+						<br>
+						<div class="info infoBorder">Population Cap: </div>
+						<div id="popCap" class="info num">0</div>
+					</div>
+					<div id="col2">
+						<div class="info">Elapsed Time: </div>
+						<div id="time" class="info num">0</div>
+						<br>
+						<div class="info">Total Population: </div>
+						<div id="popTot" class="info num">0</div>
+					</div>
+					<div id="col3">
+						<div class="info">Mining Tech: </div>
+						<div id="mineTech" class="info num">1</div>
+						<br>
+						<div class="info">Mines: </div>
+						<div id="min" class="info num">0/15</div>
+					</div>
+					<div id="col4">
+						<div class="info">Research Tech: </div>
+						<div id="researchTech" class="info num">1</div>
+						<br>
+						<div class="info">Labs: </div>
+						<div id="lab" class="info num">0/15</div>
+					</div>
+					<div id="col5">
+						<div class="info">Residence Tech: </div>
+						<div id="hotelTech" class="info">1</div>
+						<br>
+						<div class="info">Hotels: </div>
+						<div id="hot" class="info num">0/15</div>
+					</div>
 					<br>
-					<div class="info infoBorder">Population Cap: </div>
-					<div id="popCap" class="info num">0</div>
-				</div>
-				<div id="col2">
-					<div class="info">Elapsed Time: </div>
-					<div id="time" class="info num">0</div>
-					<br>
-					<div class="info">Total Population: </div>
-					<div id="popTot" class="info num">0</div>
-				</div>
-				<div id="col3">
-					<div class="info">Mining Tech: </div>
-					<div id="mineTech" class="info num">1</div>
-					<br>
-					<div class="info">Mines: </div>
-					<div id="min" class="info num">0/15</div>
-				</div>
-				<div id="col4">
-					<div class="info">Research Tech: </div>
-					<div id="researchTech" class="info num">1</div>
-					<br>
-					<div class="info">Labs: </div>
-					<div id="lab" class="info num">0/15</div>
-				</div>
-				<div id="col5">
-					<div class="info">Residence Tech: </div>
-					<div id="hotelTech" class="info">1</div>
-					<br>
-					<div class="info">Hotels: </div>
-					<div id="hot" class="info num">0/15</div>
-				</div>
-				<br>
-				<div class = "row">
-					<div class = "info">
-						<a href = "http://svs.gsfc.nasa.gov/cgi-bin/details.cgi?aid=11293">Background image by NASA</a>
+					<div class = "row">
+						<div class = "info">
+							<a href = "http://svs.gsfc.nasa.gov/cgi-bin/details.cgi?aid=11293">Background image by NASA</a>
+						</div>
 					</div>
 				</div>
+
 			</div>
 
 		</div>
 
-	</div>
+		<BR>
+		<BR>
 
-	<BR>
-	<BR>
+		<div id="asteroidContainer">
+		</div>
 
-	<div id="container">
-
-	</div>
-
-
-</body>
+	</body>
 </html>
