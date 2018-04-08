@@ -4,6 +4,7 @@
 	margin: 0;
 	padding: 0;
 }
+
 body
 {
 	margin:0;
@@ -16,6 +17,7 @@ body
 	width:100vw;
 	position:fixed;
 }
+
 #displaySidebar
 {
 	position:absolute;
@@ -23,12 +25,14 @@ body
 	right:0%;
 	height: 3%;
 }
+
 .name
 {
 	width:100%;
 	background-color: white;
 	text-align: center;
 }
+
 #title
 {
 	width: 87%;
@@ -44,7 +48,8 @@ body
 	float:right;
 	height:77%;
 }
-.confetti
+
+.asteroid
 {
 	height:60em;
 	cursor: pointer;
@@ -52,38 +57,45 @@ body
 	position: absolute;
 	top:5em;
 }
+
 #cash
 {
 	float:left;
 }
-#checkitout
+
+#interface_container
 {
 	width:78%;
 	float:right;
 	height:23%;
 	background-color:white;
 }
+
 #ui
 {
 	height:55%;
 }
+
 .infoContainer
 {
 	width: 100%;
 	margin: 0 auto;
 	height:100%;
 }
+
 .info
 {
 	float:left;
 	white-space:pre;
 }
+
 .tab
 {
 	float:left;
 	white-space:pre;
 	width:10%;
 }
+
 #col1
 {
 	float:left;
@@ -97,6 +109,7 @@ body
 	position:relative;
 	left: 19%;
 }
+
 #col3
 {
 	float:left;
@@ -110,6 +123,7 @@ body
 	position:relative;
 	left: 35%;
 }
+
 #col5
 {
 	float:left;
@@ -120,6 +134,7 @@ body
 {
 	text-align: left;
 }
+
 .row
 {
 	margin-right: auto;
@@ -127,6 +142,7 @@ body
 	width: 95%;
 	position: relative;
 }
+
 .troid
 {
 	border-bottom: 1px solid black;
@@ -134,8 +150,8 @@ body
 	background-color:#E0E0EB;
 	height: 2em;
 	white-space:pre;
-
 }
+
 .ass
 {
 	float:left;
@@ -144,6 +160,7 @@ body
 	width:80%;
 	cursor: pointer;
 }
+
 .decimate
 {
 	cursor: pointer;
@@ -151,6 +168,7 @@ body
 	width:20%;
 	float:right;
 }
+
 .choice
 {
 	float:right;
@@ -165,12 +183,12 @@ body
 	background-color: white;
 }
 
-
 #choices2
 {
 	top: 13%;
 	float:right;
 }
+
 #asteroids
 {
 	height:100%;

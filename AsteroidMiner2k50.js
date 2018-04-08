@@ -1,10 +1,8 @@
 /*
-	James Jensen
-	The date goes here
-	CISC 131
-	Spring 2013
+	Jack Jensen
 
-	Description
+	Asteroid Miner 2k50
+	2014 - 2018
 */
 var cash = 100000;
 var arrayOfAsteroids = new Array(50);
@@ -26,10 +24,66 @@ var numLabs = 0;
 var mineCap = 10;
 var hotelCap = 10;
 var labCap = 10;
+
 window.onload=function()
 {
-	create();
+	initializeAsteroids();
+	window.setInterval(generateCash, 100);
+	window.setInterval(makeAsteroidsMove,125);
 };
+
+function initializeAsteroids()
+{
+	var container = document.getElementById("asteroidContainer");
+	var ast = document.getElementById("asteroids");
+
+	var howMany = 125;
+
+	var asteroidsHTML = "";
+	for (var i = 0; i < howMany; i++)
+	{
+		asteroidsHTML = asteroidsHTML
+			+ createHTMLElement('span', i + 'asteroid', 'asteroid', '');
+	}
+
+	container.innerHTML = asteroidsHTML;
+
+	for (var i = 0; i < howMany; i++)
+	{
+		var imageSize = getRandomInteger(99) + 10;
+
+		arrayOfAsteroids[i] = {
+			state: "none",
+			time: 0,
+			size: imageSize,
+			population: 0
+		};
+
+		var element = document.getElementById(i + "asteroid");
+
+		// TODO: move this logic to a helper function
+		element.innerHTML = "<img src='Images/Asteroids/ass"
+			+ (imageSize - imageSize%10)
+			+ "std.png' style='width: 100%; height: 100%;'></img>";
+
+		element.style.height = imageSize + "px";
+		element.style.width = imageSize + "px";
+		var rotation = getRandomInteger(360);
+		element.style.transform = "rotate(" + rotation + "deg)";
+		ast.innerHTML = ast.innerHTML + "<div id='" + i
+			+ "troid' class='troid'><div id = '" + i
+			+ "ass' class='ass' onclick='buildFromId(" + i + ");'>Asteroid " + i
+			+ ": State: NONE Size: " + imageSize
+			+ "; Population: 0</div><input type='button' id='" + i
+			+ "decimate' class='decimate' onclick='decimate(" + i
+			+ ");' value='DECIMATE'></input></div>";
+		var height = getRandomInteger(container.offsetHeight - imageSize) + 10;
+		element.style.top = height + 'px';
+		var width = getRandomInteger(container.offsetWidth - imageSize);
+		element.style.left = width + 'px';
+		element.onclick = build;
+	}
+}
 
 function move(suffix, leftBoundary, rightBoundary, maxSideMovement, maxDownMovement, containerId)
 {
@@ -119,7 +173,7 @@ function generateCash()
 				{
 					arrayOfAsteroids[i].size = size - 1;
 					size = size - 1;
-					element = document.getElementById(i + "confetti");
+					element = document.getElementById(i + "asteroid");
 					sizeRound = Math.max(10,(size - size%10));
 					element.innerHTML = "<img src='Images/Asteroids/ass" + sizeRound + "brn.png' style='width: 100%; height: 100%;'></img>";
 					element.style.height = size + "px";
@@ -151,7 +205,7 @@ function generateCash()
 		}
 		else
 		{
-			element = document.getElementById(i + "confetti");
+			element = document.getElementById(i + "asteroid");
 			element.onclick = build;
 		}
 		element2.innerHTML = "Asteroid " + i + ": State: " + state.toUpperCase() + " Size: " + size + " Population: " + population + "</div>";
@@ -201,7 +255,7 @@ function trim(data)
 }
 function makeAsteroidsMove()
 {
-	move("confetti",0,document.getElementById("asteroidContainer").offsetWidth,1,1, "asteroidContainer");
+	move("asteroid",0,document.getElementById("asteroidContainer").offsetWidth,1,1, "asteroidContainer");
 }
 function getRandomRGB()
 {
@@ -276,54 +330,7 @@ function createHTMLElement(elementType, id, classInfo, content)
 	}
 	return '<' + elementType + id + classInfo +  ">" + content + '</' + elementType + '>';
 }
-function createConfetti(containerId, howMany)
-{
-	var result;
-	var idSuffix;
-	var i;
-	var element;
-	var element0;
-	var height;
-	var width;
-	var rotation;
-	var imageSize;
-	height = 0;
-	width = 0;
-	idSuffix = "confetti";
-	result = "";
-	i = 0;
-	element = "";
-	element0 = document.getElementById(containerId);
-	var ast = document.getElementById("asteroids");
-	while(i < howMany)
-	{
-		result = result + createHTMLElement('span', i + idSuffix, 'confetti', '');
-		i = i + 1;
-	}
-	document.getElementById(containerId).innerHTML = result;
-	i = 0;
-	while(i < howMany)
-	{
 
-		imageSize = getRandomInteger(99) + 10;
-		arrayOfAsteroids[i] = { state: "none", time: 0, size: imageSize, population: 0};
-		element = document.getElementById(i + idSuffix);
-
-		element.innerHTML = "<img src='Images/Asteroids/ass" + (imageSize - imageSize%10) + "std.png' style='width: 100%; height: 100%;'></img>";
-		element.style.height = imageSize + "px";
-		element.style.width = imageSize + "px";
-		rotation = getRandomInteger(360);
-		element.style.transform = "rotate(" + rotation + "deg)";
-		ast.innerHTML = ast.innerHTML + "<div id='" + i + "troid' class='troid'><div id = '" + i + "ass' class='ass' onclick='buildFromId(" + i + ");'>Asteroid " + i + ": State: NONE Size: " + imageSize + "; Population: 0</div><input type='button' id='" + i + "decimate' class='decimate' onclick='decimate(" + i + ");' value='DECIMATE'></input></div>";
-		height = getRandomInteger(element0.offsetHeight - imageSize) + 10;
-		element.style.top = height + 'px';
-		width = getRandomInteger(element0.offsetWidth - imageSize);
-		element.style.left = width + 'px';
-		element.onclick = build;
-
-		i = i + 1;
-	}
-}
 function displaySidebar()
 {
 	var sidebar;
@@ -353,14 +360,14 @@ function createForId(numb)
 	var containerId = "container";
 	height = 0;
 	width = 0;
-	idSuffix = "confetti";
+	idSuffix = "asteroid";
 	result = "";
 	i = 0;
 	element = "";
 	element0 = document.getElementById(containerId);
 	document.getElementById(numb + idSuffix).parentNode.removeChild(document.getElementById(numb + idSuffix));
 	var ast = document.getElementById("asteroids");
-	document.getElementById(containerId).innerHTML = document.getElementById(containerId).innerHTML + createHTMLElement('span', numb + idSuffix, 'confetti', '');
+	document.getElementById(containerId).innerHTML = document.getElementById(containerId).innerHTML + createHTMLElement('span', numb + idSuffix, 'asteroid', '');
 	imageSize = getRandomInteger(108) + 1;
 	arrayOfAsteroids[numb] = { state: "none", time: 0, size: imageSize, population: 0};
 	element = document.getElementById(numb + idSuffix);
@@ -374,12 +381,7 @@ function createForId(numb)
 	element.style.left = width + 'px';
 	//element.onclick = build;
 }
-function create()
-{
-	createConfetti("asteroidContainer", 125);
-	window.setInterval(generateCash, 100);
-	window.setInterval(makeAsteroidsMove,125);
-}
+
 function decimate(num)
 {
 	var element;
@@ -418,7 +420,7 @@ function decimate(num)
 			globalPop = globalPop - population;
 			numMines = numMines -1;
 		}
-		element = document.getElementById(num + "confetti");
+		element = document.getElementById(num + "asteroid");
 		element.style.zIndex = "0";
 		element2 = document.getElementById(num + "ass");
 		container = document.getElementById("container");
@@ -503,7 +505,7 @@ function chooseBuildOption()
 	var hugeness = arrayOfAsteroids[num].size;
 	var choice;
 	var choices;
-	var element = document.getElementById(num + "confetti");
+	var element = document.getElementById(num + "asteroid");
 	var element1 = document.getElementById(num + "troid");
 	var element2 = document.getElementById(num + "ass");
 	choice = document.getElementById("chooseBuild").value;
@@ -591,7 +593,7 @@ function chooseTechOption()
 	var choices;
 	techReady = false;
 
-	var element = document.getElementById(num + "confetti");
+	var element = document.getElementById(num + "asteroid");
 	choice = document.getElementById("chooseTech").value;
 	choices = document.getElementById("choices2");
 	chooseTech = document.getElementById("chooseTech").value;
